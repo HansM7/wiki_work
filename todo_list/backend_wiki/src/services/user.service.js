@@ -73,12 +73,7 @@ class UserService{
     }
 
     async createUserService(data){
-        /*
-        {
-            username:"",
-            password:""
-        }
-        */
+        
         try {
             const {username, password} = data
 
