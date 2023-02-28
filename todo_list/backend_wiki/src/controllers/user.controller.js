@@ -17,11 +17,12 @@ export const createUserController=async(req,res)=>{
 
 export const loginController=async(req,res)=>{
     const response = await userService.loginService(req.body)
-    const user ={
-        username: response.user.username,
-        password: response.user.password
-    }
+    
     if(response.success){
+        const user ={
+            username: response.user.username,
+            password: response.user.password
+        }
         const token = jwt.sign(user, process.env.TOKEN_ENTRY)
         res.status(response.code).json({...response.content,token})
     }else{
