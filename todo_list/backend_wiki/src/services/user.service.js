@@ -105,6 +105,36 @@ class UserService{
         }
     }
 
+    async validateSession(data){
+        try {
+            //{ username'normal', password:'hassshhh'}
+            const {username, password} = data
+
+            await instanceConnection()
+
+            const user = await userSchema.findOne({'username':username, 'password':password})
+            if(!user){
+                return{
+                    error:true,
+                    code:400,
+                    content:{
+                        error:true,
+                    }
+                }
+            }
+            return {
+                success:true,
+                code:200,
+                content:{
+                    success:true,
+                    message:'user correct'
+                }
+            }
+        } catch (error) {
+            
+        }
+    }
+
 }
 
 export const userService=new UserService()

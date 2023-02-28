@@ -29,3 +29,26 @@ export const loginController=async(req,res)=>{
         res.status(response.code).json(response.content)
     }
 }
+
+
+
+export const validateSessionController=async(req,res)=>{
+    const token = req.get('authorization')
+    const decode = jwt.decode(token, process.env.VAL_TOK_ENTRY)
+
+    /*
+    
+    {
+        username,
+        password
+    }
+    */
+
+    if(decode){
+        const response = await userService.validateSession(decode)
+        res.status(response.code).json(response.content)
+    }
+    else{
+        console.log("token is not available");
+    }
+}
